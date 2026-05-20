@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
 
-    bucket = "koushik-terraform-state"
+    bucket = "amzs3-dem-bucketcicd"
 
     key = "terraform.tfstate"
 
