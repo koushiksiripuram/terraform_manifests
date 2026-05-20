@@ -59,7 +59,7 @@ pipeline {
         chmod 400 /tmp/master.pem
 
         ssh -o StrictHostKeyChecking=no \
-        -i /tmp/master.pem ubuntu@${EC2_HOST} "
+        -i /tmp/master.pem ubuntu@${EC2_HOST} << 'EOF'
 
         rm -rf app
 
@@ -81,11 +81,10 @@ pipeline {
 
         docker compose up -d
 
-        "
+        EOF
         """
     }
 }
-
         
     }
 }
