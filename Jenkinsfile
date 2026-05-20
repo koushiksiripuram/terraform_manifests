@@ -50,47 +50,42 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy To EC2') {
 
-            steps {
+    steps {
 
-                withCredentials([
-                    sshUserPrivateKey(
-                        credentialsId: 'ec2-ssh-key',
-                        keyFileVariable: 'SSH_KEY'
-                    )
-                ]) {
+        sshagent(['ec2-ssh-key']) {
 
-                    sh """
-                    ssh -o StrictHostKeyChecking=no \
-                    -i ${SSH_KEY} ubuntu@${EC2_HOST} '
+            sh '''
 
-                    
+            ssh -o StrictHostKeyChecking=no ubuntu@'$EC2_HOST' "
 
-                   
+            rm -rf app
 
-                    rm -rf app
+            git clone https://github.com/koushiksiripuram/terraform-manifests.git app
 
-                    git clone https://github.com/koushiksiripuram/terraform-manifests.git app
+            cd app/scripts
 
-                    cd app/scripts
+            chmod +x install.sh
 
-                    chmod +x install.sh
-                    ./install.sh
-                    sudo systemctl enable docker
+            ./install.sh
 
-                    sudo systemctl start docker
-                    cd ../docker
-                    cd app/docker
+            sudo systemctl enable docker
 
-                    docker compose pull
+            sudo systemctl start docker
 
-                    docker compose up -d
-                    '
-                    """
-                }
-            }
+            cd ../docker
+
+            docker compose pull
+
+            docker compose up -d
+
+            "
+            '''
         }
+    }
+}
+
+        
     }
 }
