@@ -81,7 +81,7 @@ pipeline {
                     sudo systemctl enable docker
 
                     sudo systemctl start docker
-                    cd ..
+                    cd ../docker
                     cd app/docker
 
                     docker compose pull
