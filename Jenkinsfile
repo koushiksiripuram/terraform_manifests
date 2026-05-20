@@ -14,7 +14,7 @@ pipeline {
             steps {
 
                 git branch: 'main',
-                url: 'https://github.com/terraform-manifests/infra-terraform.git'
+                url: 'https://github.com/koushiksiripuram/terraform-manifests.git'
             }
         }
 
