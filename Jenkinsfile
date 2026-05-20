@@ -9,15 +9,7 @@ pipeline {
 
     stages {
 
-        stage('Checkout Infra Repo') {
-
-            steps {
-
-                git branch: 'main',
-                url: 'https://github.com/koushiksiripuram/terraform-manifests.git'
-            }
-        }
-
+        
         stage('Terraform Init') {
 
             steps {
