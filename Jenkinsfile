@@ -54,35 +54,35 @@ pipeline {
 
     steps {
 
-        sshagent(['ec2-ssh-key']) {
+        sh """
 
-            sh '''
+        chmod 400 /tmp/master.pem
 
-            ssh -o StrictHostKeyChecking=no ubuntu@'$EC2_HOST' "
+        ssh -o StrictHostKeyChecking=no \
+        -i /tmp/master.pem ubuntu@${EC2_HOST} "
 
-            rm -rf app
+        rm -rf app
 
-            git clone https://github.com/koushiksiripuram/terraform-manifests.git app
+        git clone https://github.com/koushiksiripuram/terraform-manifests.git app
 
-            cd app/scripts
+        cd app/scripts
 
-            chmod +x install.sh
+        chmod +x install.sh
 
-            ./install.sh
+        ./install.sh
 
-            sudo systemctl enable docker
+        sudo systemctl enable docker
 
-            sudo systemctl start docker
+        sudo systemctl start docker
 
-            cd ../docker
+        cd ../docker
 
-            docker compose pull
+        docker compose pull
 
-            docker compose up -d
+        docker compose up -d
 
-            "
-            '''
-        }
+        "
+        """
     }
 }
 
