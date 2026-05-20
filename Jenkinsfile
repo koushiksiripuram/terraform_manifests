@@ -63,7 +63,7 @@ pipeline {
 
         rm -rf app
 
-        git clone https://github.com/koushiksiripuram/terraform-manifests.git app
+        git clone https://github.com/koushiksiripuram/terraform_manifests.git app
 
         cd app/scripts
 
