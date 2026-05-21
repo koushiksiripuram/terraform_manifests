@@ -31,7 +31,14 @@ pipeline {
                 }
             }
         }
+        stage('Wait For EC2') {
 
+    steps {
+
+        sh 'sleep 60'
+
+    }
+}
         stage('Get EC2 DNS') {
 
             steps {
