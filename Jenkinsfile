@@ -77,9 +77,9 @@ pipeline {
 
         cd ../docker
 
-        docker compose pull
+        sudo docker compose pull
 
-        docker compose up -d
+        sudo docker compose up -d
 
         EOF
         """
