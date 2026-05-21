@@ -55,34 +55,33 @@ pipeline {
     steps {
 
         sh """
+chmod 400 /tmp/master.pem
 
-        chmod 400 /tmp/master.pem
+ssh -o StrictHostKeyChecking=no \
+-i /tmp/master.pem ubuntu@${EC2_HOST} << EOF
 
-        ssh -o StrictHostKeyChecking=no \
-        -i /tmp/master.pem ubuntu@${EC2_HOST} << 'EOF'
+rm -rf app
 
-        rm -rf app
+git clone https://github.com/koushiksiripuram/terraform-manifests.git app
 
-        git clone https://github.com/koushiksiripuram/terraform_manifests.git app
+cd app/scripts
 
-        cd app/scripts
+chmod +x install.sh
 
-        chmod +x install.sh
+./install.sh
 
-        ./install.sh
+sudo systemctl enable docker
 
-        sudo systemctl enable docker
+sudo systemctl start docker
 
-        sudo systemctl start docker
+cd ../docker
 
-        cd ../docker
+sudo docker compose pull
 
-        sudo docker compose pull
+sudo docker compose up -d
 
-        sudo docker compose up -d
-
-        EOF
-        """
+EOF
+"""
     }
 }
         
