@@ -1,6 +1,16 @@
 resource "aws_default_vpc" "default" {
 
 }
+resource "aws_eip" "ghost_eip" {
+
+  instance = aws_instance.ghost_server.id
+
+  domain = "vpc"
+
+  tags = {
+    Name = "ghost-eip"
+  }
+}
 resource "aws_instance" "ghost_server" {
 
   ami = "ami-0e35ddab05955cf57"
