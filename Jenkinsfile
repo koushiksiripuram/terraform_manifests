@@ -86,13 +86,6 @@ cd ../docker
 sudo docker compose pull
 
 sudo docker compose up -d
-// if [ ! -d "/etc/letsencrypt/live/ghostapp.duckdns.org" ]; then
-
-// sudo certbot --nginx \
-// -d ghostapp.duckdns.org \
-// --non-interactive \
-// --agree-tos \
-// -m koushiksiripuram48@gmail.com
 
 // fi
 

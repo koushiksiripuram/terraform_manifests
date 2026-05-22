@@ -49,7 +49,7 @@ services:
       database__connection__password: ghostpass
       database__connection__database: ghost
 
-      url: https://ghostapp.duckdns.org
+      url: http://ghostapp.duckdns.org
   nginx:
     image: nginx:alpine
 
