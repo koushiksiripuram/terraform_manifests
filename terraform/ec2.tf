@@ -1,15 +1,15 @@
 resource "aws_default_vpc" "default" {
 
 }
-resource "aws_eip" "ghost_eip" {
+data "aws_eip" "ghost_eip" {
 
-  instance = aws_instance.ghost_server.id
+  public_ip = "15.206.162.189"
+}
+resource "aws_eip_association" "ghost_assoc" {
 
-  domain = "vpc"
+  instance_id = aws_instance.ghost_server.id
 
-  tags = {
-    Name = "ghost-eip"
-  }
+  allocation_id = data.aws_eip.ghost_eip.id
 }
 resource "aws_instance" "ghost_server" {
 

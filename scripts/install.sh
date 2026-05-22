@@ -14,5 +14,5 @@ sudo usermod -aG docker $USER
 # 4. Cleanup
 rm get-docker.sh
 
-sudo apt install -y certbot python3-certbot-nginx
+sudo apt install certbot -y
 echo "Installation complete. Please log out and back in for group changes to take effect."

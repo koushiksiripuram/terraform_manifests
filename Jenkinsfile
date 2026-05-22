@@ -4,7 +4,7 @@ pipeline {
 
     environment {
 
-        EC2_HOST = ""
+        EC2_HOST = "15.206.162.189"
     }
 
     stages {
@@ -45,13 +45,13 @@ pipeline {
 
                 script {
 
-                    EC2_HOST = sh(
-                        script: '''
-                        cd terraform
-                        terraform output -raw elastic_ip
-                        ''',
-                        returnStdout: true
-                    ).trim()
+                    // EC2_HOST = sh(
+                    //     script: '''
+                    //     cd terraform
+                    //     terraform output -raw elastic_ip
+                    //     ''',
+                    //     returnStdout: true
+                    // ).trim()
 
                     echo "EC2 HOST: ${EC2_HOST}"
                 }
