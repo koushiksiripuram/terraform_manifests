@@ -33,10 +33,13 @@ services:
     container_name: ghost-app
 
     restart: always
-
+    expose:
+    - "2368"
     depends_on:
       mysql:
         condition: service_healthy
+    volumes:
+    - ghost_data:/var/lib/ghost/content
 
     environment:
       database__client: mysql
@@ -59,8 +62,10 @@ services:
 
     ports:
       - "80:80"
+      - "443:443"
 
     volumes:
       - ./nginx:/etc/nginx/conf.d
 volumes:
   mysql_data:
+  ghost_data:
