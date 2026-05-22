@@ -13,6 +13,8 @@ resource "aws_security_group" "ghost_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+
+
   ingress {
 
     from_port = 80
