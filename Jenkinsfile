@@ -48,7 +48,7 @@ pipeline {
                     EC2_HOST = sh(
                         script: '''
                         cd terraform
-                        terraform output -raw ec2_public_dns
+                        terraform output -raw elastic_ip
                         ''',
                         returnStdout: true
                     ).trim()
