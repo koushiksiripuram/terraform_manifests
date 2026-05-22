@@ -86,10 +86,10 @@ cd ../docker
 sudo docker compose pull
 
 sudo docker compose up -d
-if [ ! -d "/etc/letsencrypt/live/ghost_app.duckdns.org" ]; then
+if [ ! -d "/etc/letsencrypt/live/ghostapp.duckdns.org" ]; then
 
 sudo certbot --nginx \
--d ghost_app.duckdns.org \
+-d ghostapp.duckdns.org \
 --non-interactive \
 --agree-tos \
 -m koushiksiripuram48@gmail.com
