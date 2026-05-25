@@ -87,7 +87,7 @@ sudo docker compose pull
 
 sudo docker compose up -d
 
-// fi
+
 
 EOF
 """
