@@ -14,4 +14,5 @@ variable "key_name" {
 }
 variable "public_ip" {
 
-  default = "13.127.39.218" }
+  default = "13.127.39.218"
+}
