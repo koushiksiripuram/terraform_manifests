@@ -3,7 +3,7 @@ resource "aws_default_vpc" "default" {
 }
 data "aws_eip" "ghost_eip" {
 
-  public_ip = "15.206.162.189"
+  public_ip = "65.1.79.51"
 }
 resource "aws_eip_association" "ghost_assoc" {
 
