@@ -4,7 +4,7 @@ pipeline {
 
     environment {
 
-        EC2_HOST = "15.206.162.189"
+        EC2_HOST = "65.1.79.51"
     }
 
     stages {
