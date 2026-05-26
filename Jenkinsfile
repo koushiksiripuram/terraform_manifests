@@ -17,6 +17,7 @@ pipeline {
                 dir('terraform') {
 
                     sh 'terraform init'
+                    sh 'terraform plan'
                 }
             }
         }
@@ -57,12 +58,18 @@ pipeline {
                 }
             }
         }
-        stage('Deploy To EC2') {
+       stage('Deploy To EC2') {
 
     steps {
 
         sh """
 chmod 400 /tmp/master.pem
+
+aws s3 cp s3://amzs3-dem-bucketcicd/certbot-conf.tar.gz .
+
+scp -o StrictHostKeyChecking=no \
+-i /tmp/master.pem \
+certbot-conf.tar.gz ubuntu@${EC2_HOST}:/home/ubuntu/
 
 ssh -o StrictHostKeyChecking=no \
 -i /tmp/master.pem ubuntu@${EC2_HOST} << EOF
@@ -71,7 +78,13 @@ rm -rf app
 
 git clone https://github.com/koushiksiripuram/terraform_manifests.git app
 
-cd app/scripts
+mv /home/ubuntu/certbot-conf.tar.gz /home/ubuntu/app/docker/
+
+cd /home/ubuntu/app/docker
+
+tar -xzvf certbot-conf.tar.gz
+
+cd ../scripts
 
 chmod +x install.sh
 
@@ -86,8 +99,6 @@ cd ../docker
 sudo docker compose pull
 
 sudo docker compose up -d
-
-
 
 EOF
 """
