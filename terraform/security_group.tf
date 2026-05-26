@@ -1,11 +1,6 @@
 resource "aws_security_group" "ghost_sg" {
 
-  name_prefix = "ghost-sg-"
-
-  vpc_id = aws_default_vpc.default.id
-  lifecycle {
-    create_before_destroy = true
-  }
+  name = "ghost_sg"
   ingress {
 
     from_port = 22
