@@ -1,9 +1,11 @@
 resource "aws_security_group" "ghost_sg" {
 
-  name = "ghost-sg"
+  name_prefix = "ghost-sg-"
 
   vpc_id = aws_default_vpc.default.id
-
+  lifecycle {
+    create_before_destroy = true
+  }
   ingress {
 
     from_port = 22
@@ -12,7 +14,14 @@ resource "aws_security_group" "ghost_sg" {
 
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
 
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
 
   ingress {
