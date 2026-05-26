@@ -96,9 +96,15 @@ sudo systemctl start docker
 
 cd ../docker
 
+sudo docker compose down --remove-orphans
+
+sudo docker network prune -f
+
+sudo docker image rm koushiksiripuram/ghost-app:latest || true
+
 sudo docker compose pull
 
-sudo docker compose up -d
+sudo docker compose up -d --force-recreate
 
 EOF
 """
